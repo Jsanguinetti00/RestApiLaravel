@@ -17,8 +17,18 @@ class UserController extends Controller
     }
     public function update(Request $request, $id)
     {
+        // $user = User::findOrFail($id);
+        // $user->update($request->all());
+        // return response()->json($user,200);
         $user = User::findOrFail($id);
-        $user->update($request->all());
+
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->avatar = $request->avatar;
+
+        $user->save();
+
         return response()->json($user,200);
     }
 
